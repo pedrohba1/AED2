@@ -37,3 +37,29 @@ int arvore_vazia(Arv T) {
 }
 
 
+int libera_arvore(Arv *A)
+{
+	if(!arvore_vazia(*A)) {
+		libera_arvore(&(*A)->sad);
+		libera_arvore(&(*A)->sae);
+		free(*A);
+	}
+	*A = NULL;
+}
+
+
+int busca (Arv A, int elem){
+	if(arvore_vazia(A)){
+		return 0;
+	}
+
+	if(A->info == elem){
+		return 1;
+	}
+
+	busca(A->sae,elem);
+	busca(A->sad,elem);
+
+return 0;
+}
+
