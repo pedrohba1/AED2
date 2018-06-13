@@ -60,6 +60,6 @@ int busca (Arv A, int elem){
 	busca(A->sae,elem);
 	busca(A->sad,elem);
 
-return 0;
+	return 0;
 }
 
