@@ -1,18 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvores.h"
+
+
+struct registro {
+	int idade;
+	char nome[30];
+};
+
+
 struct no {
-	int info;
+	struct registro r;
 	struct no *sae;
 	struct no *sad;
 };
-
 
 Arv cria_vazia(){
 	return NULL;
 }
 
-Arv cria_arvore(int elem, Arv esq, Arv dir) {
+Arv cria_arvore(Registro *rnew , Arv esq, Arv dir) {
 
 	struct no *node;
 	node =(Arv) malloc(sizeof(struct no));
@@ -20,7 +27,7 @@ Arv cria_arvore(int elem, Arv esq, Arv dir) {
 	if(node == NULL)
 		return NULL;
 
-	node->info = elem;
+	node->r = *rnew;
 	node->sae = esq;
 	node->sad = dir;
 
@@ -47,19 +54,18 @@ int libera_arvore(Arv *A)
 	*A = NULL;
 }
 
+Registro* maior(Arv A){
+	Registro *r2;
 
-int busca (Arv A, int elem){
-	if(arvore_vazia(A)){
-		return 0;
-	}
+	 int aux = A->r.idade;
+	 
+	if(A->r.idade> r2->idade)
+		{
+			r2->idade = A->r.idade;
+		}
 
-	if(A->info == elem){
-		return 1;
-	}
+	maior(A->sae);
+	maior(A->sad);
 
-	busca(A->sae,elem);
-	busca(A->sad,elem);
-
-	return 0;
+	return r2;
 }
-
