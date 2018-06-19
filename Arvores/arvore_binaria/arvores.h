@@ -4,7 +4,6 @@
 
 typedef struct no* Arv;
 typedef struct registro Registro;
-
 void printa_registro(Registro *r);
 Registro* aloca_registro(int idade, char nome[30]);
 Arv cria_vazia();
