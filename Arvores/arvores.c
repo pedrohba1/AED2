@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvores.h"
-
+#include <string.h>
 
 struct registro {
 	int idade;
@@ -13,11 +13,11 @@ Registro* aloca_registro(int idade, char nome[30]){
 	Registro *p;
 	p =(Registro*) malloc(1*sizeof(Registro));
 	p->idade = idade;
-	*p->nome = *nome;
+	strcpy(p->nome,nome);
 	return p;
 }
 
-void printa_registro(Registro* r){
+void printa_registro(Registro *r){
 	printf("nome: %s\n",r->nome);
 	printf("idade :%d\n",r->idade);
 	
