@@ -68,13 +68,14 @@ int libera_arvore(Arv *A)
 	}
 	*A = NULL;
 }
-
+/*
 int maior(Arv A){
 	int inf_atual, inf_esq, inf_dir, inf_maior;
 
 	inf_atual = A->r.idade;
-	inf_maior = inf_atual;
+	inf_maior= inf_atual;
 	
+
 	if (A->sae != NULL) {
 		inf_esq = maior(A->sae);
 
@@ -92,6 +93,38 @@ int maior(Arv A){
 	}
 
 
-	
 	return inf_maior;
+}
+*/
+
+Registro* maior(Arv A){
+	int inf_atual, inf_esq, inf_dir, inf_maior;
+	Registro* atual, *esq, * dir, *maiord;
+	atual = (Registro*) malloc(1*sizeof(Registro));
+	esq = (Registro*) malloc(1*sizeof(Registro));
+	dir = (Registro*) malloc(1*sizeof(Registro));
+	maiord = (Registro*) malloc(1*sizeof(Registro));
+
+	*atual = A->r;
+	maiord = atual;
+	
+
+	if (A->sae != NULL) {
+		esq = maior(A->sae);
+
+		if (esq->idade > maiord->idade) {
+			maiord = esq;
+		}
+	}
+
+	if (A->sad != NULL) {
+		dir =  maior(A->sad);
+
+		if (dir->idade > esq->idade) {
+			maiord = dir;
+		}
+}
+
+
+	return maiord;
 }

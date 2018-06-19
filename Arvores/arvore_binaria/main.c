@@ -12,12 +12,11 @@ int main() {
 	Registro *p3;
 	p3 = aloca_registro(27,"rafel");
 	
-	printa_registro(p3);
+
 
 	Arv A = cria_arvore(p1, cria_arvore(p2, NULL, NULL),cria_arvore(p3,NULL, NULL));
-	
-	printf("%d",maior(A));
-	
-
+	Registro *aux;
+	aux = maior(A);
+	printa_registro(aux);
 	return 0;
 }
