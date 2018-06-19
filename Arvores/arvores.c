@@ -9,6 +9,21 @@ struct registro {
 };
 
 
+Registro* aloca_registro(int idade, char nome[30]){
+	Registro *p;
+	p =(Registro*) malloc(1*sizeof(Registro));
+	p->idade = idade;
+	*p->nome = *nome;
+	return p;
+}
+
+void printa_registro(Registro* r){
+	printf("nome: %s\n",r->nome);
+	printf("idade :%d\n",r->idade);
+	
+}
+
+
 struct no {
 	struct registro r;
 	struct no *sae;
@@ -54,18 +69,29 @@ int libera_arvore(Arv *A)
 	*A = NULL;
 }
 
-Registro* maior(Arv A){
-	Registro *r2;
+int maior(Arv A){
+	int inf_atual, inf_esq, inf_dir, inf_maior;
 
-	 int aux = A->r.idade;
-	 
-	if(A->r.idade> r2->idade)
-		{
-			r2->idade = A->r.idade;
+	inf_atual = A->r.idade;
+	inf_maior = inf_atual;
+	
+	if (A->sae != NULL) {
+		inf_esq = maior(A->sae);
+
+		if (inf_esq > inf_maior) {
+			inf_maior = inf_esq;
 		}
+	}
 
-	maior(A->sae);
-	maior(A->sad);
+	if (A->sad != NULL) {
+		inf_dir =  maior(A->sad);
 
-	return r2;
+		if (inf_dir > inf_maior) {
+			inf_maior = inf_dir;
+		}
+	}
+
+
+	
+	return inf_maior;
 }
