@@ -15,8 +15,8 @@ int main() {
 
 
 	Arv A = cria_arvore(p1, cria_arvore(p2, NULL, NULL),cria_arvore(p3,NULL, NULL));
-	Registro *aux;
-	aux = maior(A);
-	printa_registro(aux);
+	
+	
+
 	return 0;
 }

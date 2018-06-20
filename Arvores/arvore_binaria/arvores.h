@@ -10,8 +10,7 @@ Arv cria_vazia();
 Arv cria_arvore(Registro * rnew, Arv esq, Arv  dir);
 int arvore_vazia(Arv A);
 int libera_arvore(Arv *A);
-//int maior(Arv A);
 Registro* maior(Arv A);
-
+int de_maior(Arv A);
 
 #endif // ARVORES_H_INCLUDED

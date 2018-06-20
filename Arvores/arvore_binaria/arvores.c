@@ -68,34 +68,6 @@ int libera_arvore(Arv *A)
 	}
 	*A = NULL;
 }
-/*
-int maior(Arv A){
-	int inf_atual, inf_esq, inf_dir, inf_maior;
-
-	inf_atual = A->r.idade;
-	inf_maior= inf_atual;
-	
-
-	if (A->sae != NULL) {
-		inf_esq = maior(A->sae);
-
-		if (inf_esq > inf_maior) {
-			inf_maior = inf_esq;
-		}
-	}
-
-	if (A->sad != NULL) {
-		inf_dir =  maior(A->sad);
-
-		if (inf_dir > inf_maior) {
-			inf_maior = inf_dir;
-		}
-	}
-
-
-	return inf_maior;
-}
-*/
 
 Registro* maior(Arv A){
 	int inf_atual, inf_esq, inf_dir, inf_maior;
@@ -123,8 +95,38 @@ Registro* maior(Arv A){
 		if (dir->idade > esq->idade) {
 			maiord = dir;
 		}
-}
-
-
+	}
 	return maiord;
 }
+
+
+int de_maior(Arv A){
+	int qtd = 0;
+
+	if(A == NULL) 
+		return qtd;
+
+	if(A->r.idade >= 18) 
+		qtd++;
+	
+	qtd += de_maior(A->sae);
+	qtd += de_maior(A->sad);
+	return qtd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
