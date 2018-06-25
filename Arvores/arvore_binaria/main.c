@@ -11,12 +11,15 @@ int main() {
 	p2 = aloca_registro(25,"duda");
 	Registro *p3;
 	p3 = aloca_registro(27,"rafel");
-		
-
-
-	Arv A = cria_arvore(p1, cria_arvore(p2, NULL, NULL),cria_arvore(p3,NULL, NULL));
+	Registro *p4;
+	p4 = aloca_registro(23,"Juninho lorde das trevas");
+	Registro *p5;
+	p5 = aloca_registro(42,"Ricardo");
 	
-
+	Arv A3 = cria_arvore(p5, NULL, NULL);
+	Arv A2 = cria_arvore(p4,A3,NULL);
+	Arv A = cria_arvore(p1, A2,NULL);
+	printf("%d\n",um_filho(A));
 
 
 	return 0;

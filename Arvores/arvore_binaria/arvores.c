@@ -124,14 +124,9 @@ int qtde_alunos(Arv A, int ini, int fim){
 		return qtd;
 	}
 	if(A != NULL){
-		if(A->sad->r.idade >= ini && A->sad->r.idade <= fim)
-		{
+		if(A->r.idade >= ini && A->r.idade <=fim)
 			qtd++;
-		}
-		if(A->sae->r.idade >= ini && A->sae->r.idade <= fim)
-		{
-			qtd++;
-		}
+				
 	}
 
 	qtd += qtde_alunos(A->sad, ini, fim);
@@ -145,7 +140,7 @@ int um_filho(Arv A){
 	int qtd = 0;
 
 	if(A == NULL){
-		return 0;
+		return qtd;
 	}
 
 	if(A != NULL) {
@@ -153,12 +148,13 @@ int um_filho(Arv A){
 		if(A->sad == NULL &&A->sae != NULL){
 			qtd++;
 		}
-		if(A->sad != NULL && A->sae == NULL){
+		else if(A->sad != NULL && A->sae == NULL){
 			qtd++;
 		}
 	}
 	qtd+= um_filho(A->sad);
 	qtd += um_filho(A->sae);
+	return qtd;
 }
 
 
