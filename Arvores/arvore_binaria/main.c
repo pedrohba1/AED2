@@ -11,12 +11,13 @@ int main() {
 	p2 = aloca_registro(25,"duda");
 	Registro *p3;
 	p3 = aloca_registro(27,"rafel");
-	
+		
 
 
 	Arv A = cria_arvore(p1, cria_arvore(p2, NULL, NULL),cria_arvore(p3,NULL, NULL));
 	
-	
+
+
 
 	return 0;
 }

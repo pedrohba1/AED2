@@ -12,5 +12,7 @@ int arvore_vazia(Arv A);
 int libera_arvore(Arv *A);
 Registro* maior(Arv A);
 int de_maior(Arv A);
+int qtde_alunos(Arv A, int ini, int fim);
+int um_filho(Arv A);
 
 #endif // ARVORES_H_INCLUDED

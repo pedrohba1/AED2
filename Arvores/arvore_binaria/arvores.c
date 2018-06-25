@@ -9,6 +9,7 @@ struct registro {
 };
 
 
+
 Registro* aloca_registro(int idade, char nome[30]){
 	Registro *p;
 	p =(Registro*) malloc(1*sizeof(Registro));
@@ -116,6 +117,49 @@ int de_maior(Arv A){
 
 
 
+
+int qtde_alunos(Arv A, int ini, int fim){
+	int qtd =0;
+	if(A == NULL){ 
+		return qtd;
+	}
+	if(A != NULL){
+		if(A->sad->r.idade >= ini && A->sad->r.idade <= fim)
+		{
+			qtd++;
+		}
+		if(A->sae->r.idade >= ini && A->sae->r.idade <= fim)
+		{
+			qtd++;
+		}
+	}
+
+	qtd += qtde_alunos(A->sad, ini, fim);
+	qtd += qtde_alunos(A->sae, ini, fim);
+
+	return qtd;
+}
+
+
+int um_filho(Arv A){
+	int qtd = 0;
+
+	if(A == NULL){
+		return 0;
+	}
+
+	if(A != NULL) {
+
+		if(A->sad == NULL &&A->sae != NULL){
+			qtd++;
+		}
+		if(A->sad != NULL && A->sae == NULL){
+			qtd++;
+		}
+	}
+	qtd+= um_filho(A->sad);
+	qtd += um_filho(A->sae);
+}
 
 
 
