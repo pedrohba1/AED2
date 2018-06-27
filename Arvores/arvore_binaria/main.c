@@ -17,7 +17,7 @@ int main() {
 	p5 = aloca_registro(42,"Ricardo");
 	
 
-	
+
 
 	Arv A;
 	A = cria_vazia();
@@ -26,11 +26,10 @@ int main() {
 	insere_ord(&A,p3);
 	insere_ord(&A,p4);
 	insere_ord(&A,p5);
-
-	printf("%d", qtde_alunos(A,12,42));
-
-
+	
+	
+	
+	
 	libera_arvore(&A);
-
 	return 0;
 }
