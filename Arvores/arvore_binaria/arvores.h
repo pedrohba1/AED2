@@ -22,4 +22,6 @@ int insere_ord(Arv *A, Registro *r);
 int remove_ord(Arv* A, Registro * r);
 void printa_registro(Registro *r);
 
+int qtd_nos(Arv A);
+
 #endif // ARVORES_H_INCLUDED
