@@ -5,16 +5,16 @@
 
 struct registro {
 	int idade;
-	char nome[30];
+	char *nome;
 };
 
 
 
-Registro* aloca_registro(int idade, char nome[30]){
+Registro* aloca_registro(int idade, char *nome){
 	Registro *p;
 	p =(Registro*) malloc(1*sizeof(Registro));
 	p->idade = idade;
-	strcpy(p->nome,nome);
+	p->nome = nome;
 	return p;
 }
 
@@ -186,11 +186,11 @@ int altura_arv(Arv A){
 
 }
 
-int insere_ord(Arv *A, Registro r){
-	if(A == NULL){
+int insere_ord(Arv *A, Registro *r){
+	if(*A == NULL){
 	struct no *node;
 	node =(Arv) malloc(sizeof(struct no));
-	node->r = r;
+	node->r = *r;
 	node->sae = NULL;
 	node->sad = NULL;
 
@@ -199,28 +199,13 @@ int insere_ord(Arv *A, Registro r){
 
 	}
 
-	if(r.idade > (*A)->r.idade){
-		struct no *node;
-		node = (Arv) malloc(sizeof(struct no));
+	if(r->idade > (*A)->r.idade){
 		
-		node->r = r;
-		node->sae = NULL;
-		node->sad = NULL;
-		(*A)->sad = node;
-
-		return 1;
+		return insere_ord(&((*A)->sad), r);
 	}
 	else {
-		struct no *node;
-		node = (Arv) malloc(sizeof(struct no));
-		
-		node->r = r;
-		node->sae = NULL;
-		node->sad = NULL;
-		(*A)->sae = node;
-
+		return insere_ord(&((*A)->sae), r);
 	}
-
 
 
 	return 1;
