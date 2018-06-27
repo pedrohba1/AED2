@@ -26,8 +26,7 @@ int main() {
 	insere_ord(&A,p3);
 	insere_ord(&A,p4);
 	insere_ord(&A,p5);
-	
-	
+		
 	
 	
 	libera_arvore(&A);
