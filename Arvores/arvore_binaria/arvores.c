@@ -8,8 +8,6 @@ struct registro {
 	char *nome;
 };
 
-
-
 Registro* aloca_registro(int idade, char *nome){
 	Registro *p;
 	p =(Registro*) malloc(1*sizeof(Registro));
@@ -20,8 +18,7 @@ Registro* aloca_registro(int idade, char *nome){
 
 void printa_registro(Registro *r){
 	printf("nome: %s\n",r->nome);
-	printf("idade :%d\n",r->idade);
-	
+	printf("idade :%d\n",r->idade);	
 }
 
 
