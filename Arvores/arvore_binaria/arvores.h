@@ -19,5 +19,7 @@ Arv juntar(Arv A1, Arv A2);
 
 //funções não pedidas
 int insere_ord(Arv *A, Registro *r);
+int remove_ord(Arv* A, Registro * r);
 void printa_registro(Registro *r);
+
 #endif // ARVORES_H_INCLUDED
