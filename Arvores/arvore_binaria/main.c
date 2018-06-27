@@ -16,11 +16,11 @@ int main() {
 	Registro *p5;
 	p5 = aloca_registro(42,"Ricardo");
 	
-	Arv A3 = cria_arvore(p5, NULL, NULL);
-	Arv A2 = cria_arvore(p4,A3,NULL);
-	Arv A = cria_arvore(p1, A2,NULL);
-	printf("%d\n",um_filho(A));
+	Arv A;
+	A = cria_vazia();
+	insere_ord(&A,p1);
 
+	libera_arvore(&A);
 
 	return 0;
 }

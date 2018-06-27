@@ -159,11 +159,80 @@ int um_filho(Arv A){
 
 
 
+int completa(Arv A){
+	int p =1;
+	if(A->sad == NULL && A->sae != NULL)
+		 p = 0;
+	if(A->sad != NULL && A->sae == NULL)
+		p = 0;
+
+	p = completa(A->sad);
+	p = completa(A->sae);
+	return p;
+}
+
+
+int altura_arv(Arv A){
+	int h = 0;
+	if(A == NULL) return h;
+
+	if(A->sad != NULL  || A->sae != NULL)
+		h++;
+
+	h += altura_arv(A->sad);
+	h += altura_arv(A->sae);
+	return h;
+
+
+}
+
+int insere_ord(Arv *A, Registro r){
+	if(A == NULL){
+	struct no *node;
+	node =(Arv) malloc(sizeof(struct no));
+	node->r = r;
+	node->sae = NULL;
+	node->sad = NULL;
+
+	*A = node;
+	return 1;
+
+	}
+
+	if(r.idade > (*A)->r.idade){
+		struct no *node;
+		node = (Arv) malloc(sizeof(struct no));
+		
+		node->r = r;
+		node->sae = NULL;
+		node->sad = NULL;
+		(*A)->sad = node;
+
+		return 1;
+	}
+	else {
+		struct no *node;
+		node = (Arv) malloc(sizeof(struct no));
+		
+		node->r = r;
+		node->sae = NULL;
+		node->sad = NULL;
+		(*A)->sae = node;
+
+	}
 
 
 
+	return 1;
+}	
 
+Arv juntar(Arv A1, Arv A2){
+	if(A1 == NULL)
+		return A2;
+	if(A2== NULL)
+		return A1;
 
+}
 
 
 
