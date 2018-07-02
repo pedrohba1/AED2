@@ -58,7 +58,7 @@ void printa_arv(Arv A) {
 	}	
 
 	printf("<");
-	printf("%s", A->r.trafego);
+	printf("%s", A->r.id);
 	printa_arv(A->sae);
 	printa_arv(A->sad);
 
@@ -105,9 +105,9 @@ int rot_dir(Arv *raiz) {
 	if (*raiz != NULL && (*raiz)->sae != NULL) {
 		Arv n = (*raiz)->sae;
 		(*raiz)->sae = n->sad;
-		n->sae = *raiz;
-		(*raiz)->h = maior(alt_no((*raiz)->sae),alt_no((*raiz)->sad))+1;
-		n->h = maior(alt_no(n->sae), (*raiz)->h)+1;
+		n->sad = *raiz;
+		(*raiz)->h = 0;
+		n->h = 0;
 		*raiz = n;
 
 		return 1;	
@@ -121,8 +121,8 @@ int rot_esq(Arv *raiz) {
 		Arv n = (*raiz)->sad;
 		(*raiz)->sad = n->sae;
 		n->sae = *raiz;
-		(*raiz)->h = maior(alt_no((*raiz)->sae),alt_no((*raiz)->sad))+1;
-		n->h = maior(alt_no(n->sae), (*raiz)->h)+1;
+		(*raiz)->h = 0;
+		n->h = 0;
 		*raiz = n;
 
 		return 1;	
