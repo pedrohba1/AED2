@@ -154,20 +154,25 @@ int um_filho(Arv A){
 	return qtd;
 }
 
+int qtd_nos(Arv A){
+	int qtd =0;
+	if(A== NULL){
+		return qtd;
+	}
+	
+	qtd ++;
+	qtd += qtd_nos(A->sad);
+	qtd += qtd_nos(A->sae);
+	return qtd;
+}
+
+
 
 
 int completa(Arv A){
-	int p =1;
-	if(A->sad == NULL && A->sae != NULL)
-		 p = 0;
-	if(A->sad != NULL && A->sae == NULL)
-		p = 0;
-
-	p = completa(A->sad);
-	p = completa(A->sae);
-	return p;
+	
 }
-
+	
 
 int altura_arv(Arv A){
 	int h = 0;

@@ -14,7 +14,7 @@ int main() {
 	Registro *p4;
 	p4 = aloca_registro(23,"Juninho lorde das trevas");
 	Registro *p5;
-	p5 = aloca_registro(42,"Ricardo");
+	p5 = aloca_registro(11,"Ricardinho");
 	
 
 
@@ -26,7 +26,8 @@ int main() {
 	insere_ord(&A,p3);
 	insere_ord(&A,p4);
 	insere_ord(&A,p5);
-		
+	
+	printf("%d\n", um_filho(A));	
 	
 	
 	libera_arvore(&A);
