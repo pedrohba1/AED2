@@ -6,19 +6,22 @@
 struct registro {
 	int idade;
 	char *nome;
+	char *curso;
 };
 
-Registro* aloca_registro(int idade, char *nome){
+Registro* aloca_registro(int idade, char *nome, char *curso){
 	Registro *p;
 	p =(Registro*) malloc(1*sizeof(Registro));
 	p->idade = idade;
 	p->nome = nome;
+	p->curso = curso;
 	return p;
 }
 
 void printa_registro(Registro *r){
 	printf("nome: %s\n",r->nome);
-	printf("idade :%d\n",r->idade);	
+	printf("idade:%d\n",r->idade);	
+	printf("curso: %s\n", r->curso);
 }
 
 
@@ -170,7 +173,20 @@ int qtd_nos(Arv A){
 
 
 int completa(Arv A){
+	int p1, p2, p3;
 	
+	if(A == NULL) return 1;
+	if(A->sad == NULL &  A->sae ==NULL)
+		p1=1;
+	else if(A->sad != NULL && A->sae != NULL)
+		p1=1;
+	else 
+		p1=0;
+
+	p2 =completa(A->sad);
+	p3= completa(A->sae);
+	return p1&&p2&&p3;
+
 }
 	
 
@@ -198,31 +214,103 @@ int insere_ord(Arv *A, Registro *r){
 
 	*A = node;
 	return 1;
-
 	}
-
 	if(r->idade > (*A)->r.idade){
-		
 		return insere_ord(&((*A)->sad), r);
 	}
 	else {
 		return insere_ord(&((*A)->sae), r);
 	}
-
-
 	return 1;
 }	
 
 Arv juntar(Arv A1, Arv A2){
-	if(A1 == NULL)
-		return A2;
+	
 	if(A2== NULL)
-		return A1;
+		return NULL;
 
+	insere_ord(&A1,&(A2->r));
+	
+	juntar(A1, A2->sad);
+	juntar(A1, A2->sae);	
+	return A1;
 }
 
+int remove_ord(Arv *A, Registro *r){
+	if(*A == NULL)
+		return 0;
 
+	if(r->idade > (*A)->r.idade){
+		return remove_ord(&((*A)->sad), r);
+	}
 
+	else if(r->idade < (*A)->r.idade){
+		return remove_ord(&((*A)->sae),r);
+	}
 
+	else {
+		if ((*A)->sad == NULL && (*A)->sae == NULL){
+			free(*A);
+			*A = cria_vazia();
+			return 1;
+		}
+
+		else if((*A)->sad == NULL && (*A)->sae != NULL)
+		{
+			Arv aux;
+			aux = *A;
+			(*A)->sae = aux;
+			free(aux);
+		}
+
+		else if((*A)->sad != NULL && (*A)->sae != NULL)
+		{
+			Arv aux;
+			aux = *A;
+			(*A)->sad = aux;
+			free(aux);
+		}
+		else {
+			Arv aux;
+			aux = (*A)->sae;
+			while(aux->sad != NULL){
+				aux = aux->sad;
+			}
+			Registro *auxr;
+			auxr = aloca_registro((*A)->r.idade, (*A)->r.nome, (*A)->r.curso);
+			return remove_ord(&(*A)->sae, r);
+
+		}
+	}
+}
+
+Arv busca_bin_idade (Arv A, int idade){
+	if(A== NULL)
+		return NULL;
+
+	if(A->r.idade == idade){
+		return A;
+	}
+
+	else if(idade > A->r.idade){
+		return busca_bin_idade(A->sad, idade);
+	}
+	else {
+		return busca_bin_idade(A->sae,idade);
+	}
+}
+
+int exibe_ordenado(Arv A){
+
+	if (A!= NULL){
+		exibe_ordenado(A->sae);
+	
+		printa_registro(&(A->r));
+		printf("\n");
+		exibe_ordenado(A->sad);
+	}
+
+	return 1;
+}
 
 
