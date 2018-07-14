@@ -3,30 +3,29 @@
 #include "arvores.h"
 #include <string.h>
 
-struct registro {
+struct aluno {
+	char* nome;
+	int matricula;
 	int idade;
-	char *nome;
-	char *curso;
 };
 
-Registro* aloca_registro(int idade, char *nome, char *curso){
-	Registro *p;
-	p =(Registro*) malloc(1*sizeof(Registro));
+Registro* aloca_registro(int matricula, char *nome, int idade){
+	Registro *p = (Registro*) malloc(sizeof(Registro));
 	p->idade = idade;
 	p->nome = nome;
-	p->curso = curso;
+	p->matricula = matricula;
 	return p;
 }
 
 void printa_registro(Registro *r){
-	printf("nome: %s\n",r->nome);
+/*	printf("nome: %s\n",r->nome);
 	printf("idade:%d\n",r->idade);	
-	printf("curso: %s\n", r->curso);
+*/	printf("%d", r->matricula);
 }
 
 
 struct no {
-	struct registro r;
+	struct aluno r;
 	struct no *sae;
 	struct no *sad;
 };
@@ -277,40 +276,52 @@ int remove_ord(Arv *A, Registro *r){
 				aux = aux->sad;
 			}
 			Registro *auxr;
-			auxr = aloca_registro((*A)->r.idade, (*A)->r.nome, (*A)->r.curso);
+			auxr = aloca_registro((*A)->r.idade, (*A)->r.nome, (*A)->r.matricula);
 			return remove_ord(&(*A)->sae, r);
 
 		}
 	}
 }
 
-Arv busca_bin_idade (Arv A, int idade){
-	if(A== NULL)
+Arv busca_bin (Arv A, int matricula){
+	if(A == NULL)
 		return NULL;
 
-	if(A->r.idade == idade){
+	if(A->r.matricula == matricula){
 		return A;
 	}
 
-	else if(idade > A->r.idade){
-		return busca_bin_idade(A->sad, idade);
+	else if(matricula > A->r.matricula){
+		return busca_bin(A->sad, matricula);
 	}
 	else {
-		return busca_bin_idade(A->sae,idade);
+		return busca_bin(A->sae,matricula);
 	}
 }
 
-int exibe_ordenado(Arv A){
+void printa_arv(Arv A) {
+	if (A == NULL) {
+		printf("<>");
+		return;
+	}	
 
-	if (A!= NULL){
-		exibe_ordenado(A->sae);
-	
-		printa_registro(&(A->r));
-		printf("\n");
-		exibe_ordenado(A->sad);
-	}
+	printf("<");
+	printa_registro(&(A->r));
+	printa_arv(A->sae);
+	printa_arv(A->sad);
 
-	return 1;
+	printf(">");
 }
 
 
+void exibe_arv(Arv A) {
+	printa_arv(A);
+	puts("");
+}
+
+
+void copiaRegistro(Arv arv, Registro* a) {
+	a->nome = arv->r.nome;
+	a->idade = arv->r.idade;
+	a->matricula = arv->r.matricula;
+}
