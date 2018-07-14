@@ -49,6 +49,17 @@ int chaveDivisao(int chave, int table_size) {
 	return (chave & 0x7FFFFFFF) % table_size;
 }
 
+int chaveMultiplicacao(int chave, int table_size) {
+	float val = chave*0.6180339887;
+	val = val - (int) val;
+	return (int) (table_size*val);
+}
+
+int duploHash(int h1, int chave, int i, int table_size) {
+	int h2 =  chaveMultiplicacao(chave, table_size-1) + 1;
+	return chaveDivisao((h1 + i*h2), table_size);
+}
+
 int sondagemLinear(int pos, int i, int table_size) {
 	return ((pos + i) & 0x7FFFFFFF) % table_size;
 }
@@ -58,16 +69,7 @@ int sondagemQuadratica(int pos, int i, int table_size) {
 	return (pos & 0x7FFFFFFF) % table_size;
 }
 
-int duploHash(int h1, int chave, int i, int table_size) {
-	int h2 =  chaveDivisao(chave, table_size-1) + 1;
-	return ((h1 + i*h2) & 0x7FFFFFFF) % table_size;
-}
 
-int chaveMultiplicacao(int chave, int table_size) {
-	float val = chave*0.6180339887;
-	val = val - (int) val;
-	return (int) (table_size*val);
-}
 
 int insereHashSemColisao(Hash* hash, struct aluno al) {
 	if (hash == NULL || hash->qtd == hash->table_size) {
@@ -112,7 +114,7 @@ int insereHashEnderAberto(Hash* hash, struct aluno al) {
 	int i, newpos, pos = chaveDivisao(al.matricula, hash->table_size);
 
 	for (i=0; i<hash->table_size; ++i) {
-		newpos = sondagemLinear(pos, i, hash->table_size);
+		newpos = duploHash(pos, al.matricula,i, hash->table_size);
 
 		if (hash->itens[newpos] == NULL) {
 			struct aluno* a = (struct aluno*) malloc(sizeof(struct aluno));
@@ -157,11 +159,9 @@ int buscaHashEnderAberto(Hash* hash, int matricula ,struct aluno* a) {
 
 void printaRegistro(struct aluno* a) {
 	if (a != NULL) {
-		printf("Nome: %s\n", a->nome);
-		printf("Idade: %d\n", a->idade);
-		printf("Matricula: %d\n", a->matricula);
+		printf("%d\n", a->matricula);
 	} else {
-		printf("NULL\n");
+		printf("---------------------------------------------------\n");
 	}
 }
 
@@ -173,8 +173,9 @@ void printaHash(Hash* hash) {
 
 		printf("Registros:\n");
 		for (i=0; i<hash->table_size; ++i) {
+			printf("%d)\t", i);
 			printaRegistro(hash->itens[i]);
-			puts("");
+			// puts("");
 		}
 	}
 }

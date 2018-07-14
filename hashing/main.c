@@ -2,7 +2,7 @@
 #include "hash.h"
 
 int main() {
-	Hash* hash = criaHash(5);
+	Hash* hash = criaHash(37);
 	struct aluno a, b, c, x;
 	
 	a.nome = "Matheus";
@@ -19,6 +19,21 @@ int main() {
 
 	insereHashEnderAberto(hash, a);
 	insereHashEnderAberto(hash, b);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
+	insereHashEnderAberto(hash, c);
 	insereHashEnderAberto(hash, c);
 
 	printf("%d\n", buscaHashEnderAberto(hash, 123412, &x));
